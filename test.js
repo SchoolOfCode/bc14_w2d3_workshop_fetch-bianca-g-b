@@ -1,5 +1,7 @@
 // variables from tasks ouside functions
 let quoteHistory = document.querySelector('#quote-history');
+let quotesList = ['']
+//let firstElement = newQuote.textContent
 
 // click button
 let button = document.querySelector('#new-quote-button');
@@ -12,14 +14,39 @@ async function getQuote() {
     let data = await response.json()
     let quote = document.querySelector('#quote');
     quote.textContent = data.data[0];
-    console.log(quote.textContent)
-    addQuote(quote.textContent);
-    let q = [];
-    q.push(quote.textContent);
-    console.log(q)
+
+    //let q = document.querySelectorAll('li');
+    //let historyList = addQuote(quote.textContent);
+    //;
+    if (quotesList.includes(quote.textContent)===false) {
+        //firstElement = document.querySelector('li');
+        addQuote(quote.textContent);
+        quotesList.push(quote.textContent);
+        console.log('test - first element')
+        }
+        else  {
+            if (quotesList[0]==='') {
+                console.log('test')
+                addQuote(quote.textContent);
+                quotesList[0]=quote.textContent;
+                console.log('quote: ',quote.textContent)
+            }
+        
+
+            else if (quotesList.includes(quote.textContent)) {
+                // delete element somehow
+                //q.delete(quote.textContent)
+
+                console.log('ok')
+                console.log(quotesList)
+                console.log('quote: ',quote.textContent)
+            }
+        }
+   
+    
+    
     
 }
-
 getQuote();
 
 
@@ -27,16 +54,9 @@ getQuote();
 function addQuote(oneString) {
     const newQuote = document.createElement('li');
     newQuote.textContent= oneString
-    quoteHistory.appendChild(newQuote);
-    let quotesList = document.querySelectorAll('li');
-    //return quotesList;
+    quoteHistory.append(newQuote);
+    //let quotesList = document.querySelectorAll('li');
+    //return newQuote;
     
 }
 
-// write function to identify duplicates
-function duplicates(listElement) {
-    for (let i=0; i< listElement.length; i++) {
-        if (listElement.textContent!=quote)
-        callFunction(quote)
-    }
-}
